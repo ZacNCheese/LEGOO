@@ -11,6 +11,7 @@ public partial class MainPage : ContentPage
 
 	private void OnCounterClicked(object? sender, EventArgs e)
 	{
+		//this is zach testing the commit
 		count++;
 
 		if (count == 1)
