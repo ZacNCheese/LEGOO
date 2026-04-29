@@ -31,6 +31,11 @@ public static class MauiProgram
         builder.Services.AddSingleton(new AppDatabase(dbPath));
         builder.Services.AddSingleton<LegoColorRepository>();
 		builder.Services.AddSingleton<MainPage>();
+		builder.Services.AddSingleton<RestService>();
+		builder.Services.AddSingleton<LegoColorSyncService>();
+		builder.Services.AddSingleton<LegoMinifigSyncService>();
+		builder.Services.AddSingleton<LegoMinifigsRepository>();
+		builder.Services.AddSingleton<SyncOrchestrator>();
 		return builder.Build();
 	}
 }

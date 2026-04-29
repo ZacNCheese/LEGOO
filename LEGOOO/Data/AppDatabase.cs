@@ -10,6 +10,8 @@ public class AppDatabase
 
         // 👇 THIS creates your table
         _db.CreateTableAsync<LegoColor>().Wait();
+
+        _db.CreateTableAsync<LegoMinifig>().Wait();
     }
 
     public SQLiteAsyncConnection Connection => _db;
