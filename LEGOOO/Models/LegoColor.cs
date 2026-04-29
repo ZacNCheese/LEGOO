@@ -1,7 +1,12 @@
 using System.Text.Json.Serialization;
+using SQLite;
 
 public class LegoColor
 {
+    //[PrimaryKey] [AutoIncrement]
+    //public int AutoID {get; set;}
+
+    [PrimaryKey]
     [JsonPropertyName("id")]
     public int Id { get; set; }
 

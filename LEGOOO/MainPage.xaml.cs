@@ -3,10 +3,12 @@ using System.Text.Json;
 using System.Diagnostics;
 using Microsoft.Maui.Primitives;
 
+
 public partial class MainPage : ContentPage
 {
 	public List<LegoColor> LegoColors { get; set; }
 
+	private readonly AppDatabase _db;
 
 	private HttpClient _client = new HttpClient();
 
@@ -15,9 +17,10 @@ public partial class MainPage : ContentPage
 		PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 	};
 
-	public MainPage()
+	public MainPage(AppDatabase db)
 	{
 		InitializeComponent();
+		_db = db;
 	}
 
 	public async void OnCounterClicked(object? sender, EventArgs e)
@@ -28,7 +31,18 @@ public partial class MainPage : ContentPage
 
 		foreach (var color in colors)
 		{
-			Debug.WriteLine(color.ColorRGB);
+			var colorForInsert = new LegoColor
+			{
+				Id = color.Id,
+				ColorName = color.ColorName,
+				ColorRGB = color.ColorRGB,
+				Is_Transluscent = color.Is_Transluscent
+
+			};
+
+			await _db.Connection.InsertOrReplaceAsync(color);
+
+			Debug.WriteLine("Successfully Inserted Color: " + color.Id.ToString());
 		}
 
 	}
